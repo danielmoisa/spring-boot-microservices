@@ -35,12 +35,12 @@ public class InventoryServiceRoutes {
         return HandlerFunctions.http(baseUrl + value).handle(request);
     }
 
-//    @Bean
-//    public RouterFunction<ServerResponse> inventoryServiceApiDocs() {
-//        return GatewayRouterFunctions.route("inventory-service-api-docs")
-//                .route(RequestPredicates.path("/docs/inventoryservice/v3/api-docs"),
-//                        HandlerFunctions.http("http://localhost:8080"))
-//                .filter(setPath("/v3/api-docs"))
-//                .build();
-//    }
+    @Bean
+    public RouterFunction<ServerResponse> inventoryServiceApiDocs() {
+        return GatewayRouterFunctions.route("inventory-service-api-docs")
+                .route(RequestPredicates.path("/docs/inventoryservice/v3/api-docs"),
+                        HandlerFunctions.http("http://localhost:8080"))
+                .filter(setPath("/v3/api-docs"))
+                .build();
+    }
 }
