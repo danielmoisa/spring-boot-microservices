@@ -18,22 +18,22 @@ import java.time.LocalDateTime;
 @Table(name = "customer_order")
 public class Order {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "event_id")
-    private Long eventId;
-
-    @Column(name = "quantity")
-    private Long ticketCount;
-
-    @Column(name = "total_price")
+    @Column(name = "total")
     private BigDecimal totalPrice;
 
+    @Column(name="quantity")
+    private Long ticketCount;
+
     @CreationTimestamp
-    @Column(name = "placed_at", nullable = false, updatable = false)
+    @Column(name = "placed_at", updatable = false, nullable = false)
     private LocalDateTime placedAt;
 
     @Column(name = "customer_id")
     private Long customerId;
+
+    @Column(name = "event_id")
+    private Long eventId;
 }

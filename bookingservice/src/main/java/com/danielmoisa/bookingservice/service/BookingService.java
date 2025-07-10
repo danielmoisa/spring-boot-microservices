@@ -1,6 +1,7 @@
 package com.danielmoisa.bookingservice.service;
 
 import com.danielmoisa.bookingservice.client.InventoryServiceClient;
+import com.danielmoisa.bookingservice.dto.CustomerDTO;
 import com.danielmoisa.bookingservice.entity.Customer;
 import com.danielmoisa.bookingservice.event.BookingEvent;
 import com.danielmoisa.bookingservice.repository.CustomerRepository;
@@ -47,7 +48,7 @@ public class BookingService {
         log.info("Booking event sent to Kafka: {}", bookingEvent);
 
         return BookingResponse.builder()
-                .userId(bookingEvent.getId())
+                .userId(bookingEvent.getUserId())
                 .eventId(bookingEvent.getEventId())
                 .ticketCount(bookingEvent.getTicketCount())
                 .totalPrice(bookingEvent.getTotalPrice())
@@ -61,5 +62,12 @@ public class BookingService {
                 .ticketCount(request.getTicketCount())
                 .totalPrice(inventoryResponse.getTicketPrice().multiply(BigDecimal.valueOf(request.getTicketCount())))
                 .build();
+    }
+
+    public CustomerDTO getCustomerById(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
+
+        return new CustomerDTO(customer.getId(), customer.getEmail(), customer.getAddress());
     }
 }
