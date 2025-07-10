@@ -12,7 +12,7 @@ public class BookingServiceRoutes {
     @Bean
     public RouterFunction<ServerResponse> bookingRoutes() {
         return GatewayRouterFunctions.route("booking-service")
-                .route(RequestPredicates.POST("/api/v1/booking"), HandlerFunctions.http("http//:localhost:8081/api/v1/booking"))
+                .route(RequestPredicates.POST("/api/v1/booking"), HandlerFunctions.http("http://localhost:8081/api/v1/booking"))
                 .build();
     }
 }
